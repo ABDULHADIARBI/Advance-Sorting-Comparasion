@@ -29,7 +29,8 @@ class A{
 		
 		float insertion(string name,int N)
 		{
-			auto start = high_resolution_clock::now();
+			clock_t open, close;
+            open = clock();
 			int k=0;
 		    fstream Myfile;
 	        int *arr=new int[N];
@@ -60,10 +61,9 @@ class A{
                 	arr[j+1]=current;
                 }
             Edit_file(arr,name,N);
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            duration=duration/1000;
-            return duration.count();
+            close = clock( );
+            double time= double(close - open)/double(CLOCKS_PER_SEC);
+            return time;
 
 		}
 		void print(int arr[],int N)
@@ -124,13 +124,15 @@ class A{
    }
 }
 
-int merge_Sort(string name,int l, int r, int N)
-{
-	int k=0;
+float merge_Sort(string name,int l, int r, int N)
+{           
+
+            clock_t open, close;
+            open = clock();
+	        int k=0;
 		    fstream Myfile;
 	        int *arr=new int[N];
             Myfile.open(name);
-            auto start = high_resolution_clock::now();
             if(Myfile.is_open())
             {
                 while(Myfile>>arr[k])
@@ -143,10 +145,10 @@ int merge_Sort(string name,int l, int r, int N)
             
             mergeSort(arr,l,r,N);
             Edit_file(arr,name,N);
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            duration=duration/1000;
-            return duration.count();
+            close = clock( );
+            double time= double(close - open)/double(CLOCKS_PER_SEC);
+            return time;
+            
 }
 void mergeSort(int arr[], int l, int r,int N ) {
 	
@@ -161,13 +163,14 @@ void mergeSort(int arr[], int l, int r,int N ) {
       
    }
 }
-int quick_mid(string name,int N)
+float quick_mid(string name,int N)
 {
 	int k=0;
 		    fstream Myfile;
 	        int *arr=new int[N];
             Myfile.open(name);
-            auto start = high_resolution_clock::now();
+             clock_t open, close;
+            open = clock();
             if(Myfile.is_open())
             {
                 while(Myfile>>arr[k])
@@ -180,10 +183,9 @@ int quick_mid(string name,int N)
             
             quickSort_MID(arr, 0, N - 1); 
             Edit_file(arr,name,N);
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            duration=duration/1000;
-            return duration.count();
+            close = clock( );
+            double time= double(close - open)/double(CLOCKS_PER_SEC);
+            return time;
 }
 int partition (int arr[], int low, int high) 
 { 
@@ -241,13 +243,14 @@ void quickSort_rand(int arr[], int low, int high)
         quickSort_rand(arr, pi + 1, high);
     }
 }
-int quick_rand(string name,int N)
+float quick_rand(string name,int N)
 {
 	int k=0;
 		    fstream Myfile;
 	        int *arr=new int[N];
             Myfile.open(name);
-            auto start = high_resolution_clock::now();
+             clock_t open, close;
+            open = clock();
             if(Myfile.is_open())
             {
                 while(Myfile>>arr[k])
@@ -259,10 +262,9 @@ int quick_rand(string name,int N)
             }
             quickSort_rand(arr,0,N-1);
             Edit_file(arr,name,N);
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            duration=duration/1000;
-            return duration.count();
+           close = clock( );
+            double time= double(close - open)/double(CLOCKS_PER_SEC);
+            return time;
 }
 int partition_pivot_last(int array[], int low, int high) {
 	int pivot = array[high];
@@ -305,13 +307,14 @@ void quickSort_MED(int array[], int low, int high) {
 	}
 }
 
-int quick_median(string name,int N)
+float quick_median(string name,int N)
 {
 	int k=0;
 		    fstream Myfile;
 	        int *arr=new int[N];
             Myfile.open(name);
-            auto start = high_resolution_clock::now();
+            clock_t open, close;
+            open = clock();
             if(Myfile.is_open())
             {
                 while(Myfile>>arr[k])
@@ -323,19 +326,19 @@ int quick_median(string name,int N)
             }
             quickSort_MED(arr,0,N-1);
             Edit_file(arr,name,N);
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            duration=duration/1000;
-            return duration.count();
+           close = clock( );
+            double time= double(close - open)/double(CLOCKS_PER_SEC);
+            return time;
 }
 
-int Quick_Updated_Median(string name,int N)
+float Quick_Updated_Median(string name,int N)
 {
-	int k=0;
+        	clock_t open, close;
+            open = clock();
+	        int k=0;
 		    fstream Myfile;
 	        int *arr=new int[N];
             Myfile.open(name);
-            auto start = high_resolution_clock::now();
             if(Myfile.is_open())
             {
                 while(Myfile>>arr[k])
@@ -347,10 +350,9 @@ int Quick_Updated_Median(string name,int N)
             }
             quickSort_MED(arr,0,N-1);
             Edit_file(arr,name,N);
-            auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<microseconds>(stop - start);
-            duration=duration/1000;
-            return duration.count();
+            close = clock( );
+            double time= double(close - open)/double(CLOCKS_PER_SEC);
+            return time;
 }
 
 void print_graph(int arr[],string name,int N)
@@ -377,6 +379,7 @@ int main()
 	
 	cout<<"*****SORTING FOR 50 RANDOM NUMBERS*****"<<endl<<endl;
 	a.generate_rand("Random50.txt",50);
+	a.print_graph(arr,"graph.csv",50);
 	cout<<"TIME TAKEN FOR INSERTION IS   "<<a.insertion("Random50.txt",50)<<" sec"<<endl;
 	cout<<"TIME TAKEN FOR MERGE IS       "<<a.merge_Sort("Random50.txt",0,50-1,50)<<" sec"<<endl;
 	cout<<"TIME TAKEN FOR QUICK 1 IS     "<<a.quick_rand("Random50.txt",50)<<" sec"<<endl;
